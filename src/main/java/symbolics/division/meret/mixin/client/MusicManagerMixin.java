@@ -13,13 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MusicManager.class)
 public class MusicManagerMixin {
-    @Shadow
-    @Final
-    private RandomSource random;
-    @Shadow private int nextSongDelay;
+	@Shadow @Final private RandomSource random;
+	@Shadow private int nextSongDelay;
 
-    @Inject(method = "startPlaying", at = @At("HEAD"))
-    void startPlaying(Music music, CallbackInfo ci) {
-        nextSongDelay = Mth.nextInt(random, music.getMinDelay(), music.getMaxDelay());
-    }
+	@Inject(method = "startPlaying", at = @At("HEAD"))
+	void startPlaying(Music music, CallbackInfo ci) {
+		nextSongDelay = Mth.nextInt(random, music.getMinDelay(), music.getMaxDelay());
+	}
 }
