@@ -12,7 +12,7 @@ Requires <a href="https://modrinth.com/mod/area_lib">Area Lib</a>.<br/>
 
 Usage:
 
-- `/meret set` - set the music for an area to a specific sound. jukebox tag c compatible.
+- `/meret set` - set the music for an area to a specific sound. jukebox tag compatible.
 - `/meret clear` - remove the music override for an area.
 
 Config (`config/meret.toml`):
