@@ -1,4 +1,4 @@
-package symbolics.division.meret;
+package symbolics.division.meret.client;
 
 import dev.doublekekse.area_lib.Area;
 import dev.doublekekse.area_lib.data.AreaClientData;
@@ -7,6 +7,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.sounds.Music;
 import org.jetbrains.annotations.Nullable;
+import symbolics.division.meret.Meret;
 
 import java.util.Comparator;
 

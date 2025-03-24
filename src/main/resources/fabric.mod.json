@@ -1,42 +1,37 @@
 {
 	"schemaVersion": 1,
-	"id": "meret",
+	"id": "${modId}",
 	"version": "${version}",
-	"name": "meret",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "${modName}",
+	"description": "${modDescription}",
 	"authors": [
-		"Me!"
+		"${authors}"
+	],
+	"contributors": [
+		"${contributors}"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "${homepage}",
+		"issues": "${issues}",
+		"sources": "${sources}"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/meret/icon.png",
-	"environment": "*",
+	"license": "${license}",
+	"icon": "assets/${modId}/icon.png",
+	"mixins": [
+		"${modId}.mixins.json"
+	],
+	"depends": {
+		"minecraft": ">=${mc}",
+		"fabricloader": ">=${fl}",
+		"fabric-api": ">=${fapi}",
+		"area_lib": ">=${areaLib}"
+	},
 	"entrypoints": {
 		"main": [
 			"symbolics.division.meret.Meret"
 		],
 		"client": [
 			"symbolics.division.meret.MeretClient"
-		],
-		"fabric-datagen": [
-			"symbolics.division.meret.MeretDataGenerator"
 		]
-	},
-	"mixins": [
-		"meret.mixins.json",
-		{
-			"config": "meret.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.16.9",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
-		"fabric-api": "*",
-		"area_lib": "*"
 	}
 }
