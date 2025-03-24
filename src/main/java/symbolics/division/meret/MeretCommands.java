@@ -35,7 +35,7 @@ public class MeretCommands {
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context, Commands.CommandSelection selection) {
 		dispatcher.register(
 			literal("meret")
-				.then(literal("set_music")
+				.then(literal("set")
 					.then(argument("area", AreaArgument.area())
 						.then(argument("sound", ResourceLocationArgument.id())
 							.suggests(SuggestionProviders.AVAILABLE_SOUNDS)
