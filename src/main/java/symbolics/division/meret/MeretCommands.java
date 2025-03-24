@@ -39,8 +39,8 @@ public class MeretCommands {
 					.then(argument("area", AreaArgument.area())
 						.then(argument("sound", ResourceLocationArgument.id())
 							.suggests(SuggestionProviders.AVAILABLE_SOUNDS)
-							.then(argument("min_delay", IntegerArgumentType.integer())
-								.then(argument("max_delay", IntegerArgumentType.integer())
+							.then(argument("min_delay", IntegerArgumentType.integer(0))
+								.then(argument("max_delay", IntegerArgumentType.integer(0))
 									.then(argument("replace_current_music", BoolArgumentType.bool())
 										.executes(c -> setMusic(
 											c.getSource().getServer(),
