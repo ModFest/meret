@@ -1,5 +1,5 @@
 <!--suppress HtmlDeprecatedTag, XmlDeprecatedElement -->
-<center><img alt="mod preview" src="" /></center>
+<center><!-- <img alt="mod preview" src="" />--></center>
 
 <center>
 Soundtrack areas for mapmakers.<br/>
@@ -10,7 +10,12 @@ Requires <a href="https://modrinth.com/mod/area_lib">Area Lib</a>.<br/>
 
 ---
 
+Usage:
+- `/meret set` - set the music for an area to a specific sound. jukebox tag c compatible.
+- `/meret clear` - remove the music override for an area.
 
+Config (`config/meret.toml`):
+- `overrideAll` - prevent standard situational music from playing in-game (menu music will still play)
 
 ---
 

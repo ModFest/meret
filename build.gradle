@@ -10,6 +10,7 @@ version = "$baseVersion+$branch"
 archivesBaseName = project.slug
 
 repositories {
+	maven { url "https://repo.sleeping.town/" }
 	exclusiveContent {
 		forRepository {
 			maven { url "https://api.modrinth.com/maven" }
@@ -28,6 +29,9 @@ dependencies {
 	modImplementation libs.fapi
 
 	modImplementation libs.areaLib
+
+	implementation libs.kaleidoConfig
+	include libs.kaleidoConfig
 }
 
 processResources {
