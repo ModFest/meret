@@ -31,7 +31,7 @@
 			"symbolics.division.meret.Meret"
 		],
 		"client": [
-			"symbolics.division.meret.MeretClient"
+			"symbolics.division.meret.client.MeretClient"
 		]
 	}
 }
