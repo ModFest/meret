@@ -31,6 +31,6 @@ public class MeretClient implements ClientModInitializer {
 		return areaSavedData.findTrackedAreasContaining(player).stream()
 			.filter(area -> area.has(Meret.AREA_MUSIC_DATA_COMPONENT))
 			.max(Comparator.comparingInt(Area::getPriority))
-			.map(area -> area.get(Meret.AREA_MUSIC_DATA_COMPONENT).getMusic(player.registryAccess(), player.getRandom()));
+			.map(area -> area.get(Meret.AREA_MUSIC_DATA_COMPONENT).getMusic());
 	}
 }

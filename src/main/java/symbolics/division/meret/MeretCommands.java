@@ -1,21 +1,15 @@
 package symbolics.division.meret;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.builder.ArgumentBuilder;
-import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import com.mojang.brigadier.suggestion.SuggestionProvider;
 import dev.doublekekse.area_lib.Area;
 import dev.doublekekse.area_lib.command.argument.AreaArgument;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.commands.synchronization.SuggestionProviders;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -52,17 +46,6 @@ public class MeretCommands {
 		return 1;
 	}
 
-	private static int setMusicCategory(Consumer<Component> feedback, MinecraftServer server, Area area, ResourceLocation tag, int minInterval, int maxInterval, boolean replaceCurrentMusic) {
-		area.put(server, Meret.AREA_MUSIC_DATA_COMPONENT, new AreaMusicComponent(tag, minInterval, maxInterval, replaceCurrentMusic));
-		feedback.accept(feedback(ChatFormatting.GREEN,
-			Component.literal("music override for "),
-			Component.literal(area.getId().toString()).withStyle(ChatFormatting.WHITE),
-			Component.literal(" set to category "),
-			Component.literal(tag.toString()).withStyle(ChatFormatting.WHITE)
-		));
-		return 1;
-	}
-
 	private static int clearMusic(Consumer<Component> feedback, MinecraftServer server, Area area) {
 		if (!area.has(Meret.AREA_MUSIC_DATA_COMPONENT)) {
 			feedback.accept(feedback(ChatFormatting.YELLOW,
@@ -78,15 +61,6 @@ public class MeretCommands {
 		return 1;
 	}
 
-	private static RequiredArgumentBuilder<CommandSourceStack, Integer> applyMusicArguments(Command<CommandSourceStack> executor) {
-		return argument("minDelay", IntegerArgumentType.integer(0))
-			.then(argument("maxDelay", IntegerArgumentType.integer(0))
-				.then(argument("replaceCurrent", BoolArgumentType.bool())
-					.executes(executor)
-				)
-		);
-	}
-
 	public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context, Commands.CommandSelection selection) {
 		dispatcher.register(
 			literal("meret")
@@ -94,30 +68,19 @@ public class MeretCommands {
 					.then(argument("area", AreaArgument.area())
 						.then(argument("sound", ResourceLocationArgument.id())
 							.suggests(SuggestionProviders.AVAILABLE_SOUNDS)
-							.then(
-								applyMusicArguments(c -> setMusic(
-									c.getSource()::sendSystemMessage,
-									c.getSource().getServer(),
-									AreaArgument.getArea(c, "area"),
-									ResourceLocationArgument.getId(c, "sound"),
-									IntegerArgumentType.getInteger(c, "minDelay"),
-									IntegerArgumentType.getInteger(c, "maxDelay"),
-									BoolArgumentType.getBool(c, "replaceCurrent")
-								))
-							)
-						)
-						.then(literal("category")
-							.then(argument("category", ResourceLocationArgument.id())
-								.then(
-									applyMusicArguments(c -> setMusicCategory(
-										c.getSource()::sendSystemMessage,
-										c.getSource().getServer(),
-										AreaArgument.getArea(c, "area"),
-										ResourceLocationArgument.getId(c, "category"),
-										IntegerArgumentType.getInteger(c, "minDelay"),
-										IntegerArgumentType.getInteger(c, "maxDelay"),
-										BoolArgumentType.getBool(c, "replaceCurrent")
-									))
+							.then(argument("minDelay", IntegerArgumentType.integer(0))
+								.then(argument("maxDelay", IntegerArgumentType.integer(0))
+									.then(argument("replaceCurrent", BoolArgumentType.bool())
+										.executes(c -> setMusic(
+											c.getSource()::sendSystemMessage,
+											c.getSource().getServer(),
+											AreaArgument.getArea(c, "area"),
+											ResourceLocationArgument.getId(c, "sound"),
+											IntegerArgumentType.getInteger(c, "minDelay"),
+											IntegerArgumentType.getInteger(c, "maxDelay"),
+											BoolArgumentType.getBool(c, "replaceCurrent")
+										))
+									)
 								)
 							)
 						)
