@@ -15,7 +15,7 @@ public class Meret implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 	public static final MeretConfig CONFIG = MeretConfig.createToml(FabricLoader.getInstance().getConfigDir(), "", ID, MeretConfig.class);
 
-	public static final AreaDataComponentType<AreaMusicComponent> AREA_MUSIC_DATA_COMPONENT = AreaDataComponentTypeRegistry.registerTracking(id("area_music"), () -> new AreaMusicComponent(null));
+	public static final AreaDataComponentType<AreaMusicComponent> AREA_MUSIC_DATA_COMPONENT = AreaDataComponentTypeRegistry.registerTracking(id("area_music"), AreaMusicComponent::new);
 
 	public static ResourceLocation id(String id) {
 		return ResourceLocation.fromNamespaceAndPath(ID, id);
