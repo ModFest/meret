@@ -79,9 +79,6 @@ public class AreaMusicComponent implements AreaDataComponent, AreaMusic {
 			song -> song,
 			category -> {
 				Optional<HolderSet.Named<JukeboxSong>> taggedOptional = registryAccess.registry(Registries.JUKEBOX_SONG).orElseThrow().getTag(category.tag);
-				Meret.LOGGER.info(
-					"loading tag: {}", category.tag
-					);
 				if (taggedOptional.isEmpty()) {
 					Meret.LOGGER.warn("Failed to load music for tag: {}", category.tag);
 					return EMPTY;
