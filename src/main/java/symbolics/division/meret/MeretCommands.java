@@ -95,6 +95,7 @@ public class MeretCommands {
 						))
 					)
 				)
+			.requires(source -> source.hasPermission(2))
 		);
 	}
 }
