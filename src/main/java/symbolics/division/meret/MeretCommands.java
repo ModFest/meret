@@ -67,7 +67,7 @@ public class MeretCommands {
 				.then(literal("set")
 					.then(argument("area", AreaArgument.area())
 						.then(argument("sound", ResourceLocationArgument.id())
-							.suggests(SuggestionProviders.AVAILABLE_SOUNDS)
+							.suggests(SuggestionProviders.cast(SuggestionProviders.AVAILABLE_SOUNDS))
 							.then(argument("minDelay", IntegerArgumentType.integer(0))
 								.then(argument("maxDelay", IntegerArgumentType.integer(0))
 									.then(argument("replaceCurrent", BoolArgumentType.bool())
