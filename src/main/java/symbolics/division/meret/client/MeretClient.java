@@ -1,15 +1,12 @@
 package symbolics.division.meret.client;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
 import dev.doublekekse.area_lib.Area;
 import dev.doublekekse.area_lib.data.AreaClientData;
 import dev.doublekekse.area_lib.data.AreaSavedData;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Holder;
 import net.minecraft.sounds.Music;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +16,6 @@ import java.util.Comparator;
 import java.util.Optional;
 
 public class MeretClient implements ClientModInitializer {
-	public static final Music EMPTY = new Music(Holder.direct(SoundEvents.EMPTY), 10, 10, false);
 	public static final Logger LOGGER = LoggerFactory.getLogger(Meret.ID);
 
 	@Override
