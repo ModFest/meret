@@ -65,7 +65,7 @@ public class MeretCommands {
 		dispatcher.register(
 			literal("meret")
 				.then(literal("set")
-					.then(argument("area", AreaArgument.area())
+					.then(argument("area", ResourceLocationArgument.id()).suggests(AreaArgument::listSuggestions)
 						.then(argument("sound", ResourceLocationArgument.id())
 							.suggests(SuggestionProviders.cast(SuggestionProviders.AVAILABLE_SOUNDS))
 							.then(argument("minDelay", IntegerArgumentType.integer(0))
@@ -87,7 +87,7 @@ public class MeretCommands {
 					)
 				)
 				.then(literal("clear")
-					.then(argument("area", AreaArgument.area())
+					.then(argument("area", ResourceLocationArgument.id()).suggests(AreaArgument::listSuggestions)
 						.executes(c -> clearMusic(
 							c.getSource()::sendSystemMessage,
 							c.getSource().getServer(),
