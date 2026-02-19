@@ -1,7 +1,7 @@
 package symbolics.division.meret.mixin.client;
 
-import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.client.sounds.MusicManager;
+import net.minecraft.sounds.Music;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import org.spongepowered.asm.mixin.Final;
@@ -20,11 +20,11 @@ public class MusicManagerMixin {
 	private int nextSongDelay;
 
 	@Inject(method = "startPlaying", at = @At("HEAD"))
-	void startPlaying(MusicInfo musicInfo, CallbackInfo ci) {
-		if (musicInfo.music() == null) {
+	void startPlaying(Music music, CallbackInfo ci) {
+		if (music == null) {
 			return;
 		}
 
-		nextSongDelay = Mth.nextInt(random, musicInfo.music().minDelay(), musicInfo.music().maxDelay());
+		nextSongDelay = Mth.nextInt(random, music.minDelay(), music.maxDelay());
 	}
 }

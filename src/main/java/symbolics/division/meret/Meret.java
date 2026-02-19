@@ -6,7 +6,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +17,8 @@ public class Meret implements ModInitializer {
 
 	public static final AreaDataComponentType<AreaMusicComponent> AREA_MUSIC_DATA_COMPONENT = AreaDataComponentTypeRegistry.registerTracking(id("area_music"), () -> new AreaMusicComponent(null));
 
-	public static ResourceLocation id(String id) {
-		return ResourceLocation.fromNamespaceAndPath(ID, id);
+	public static Identifier id(String id) {
+		return Identifier.fromNamespaceAndPath(ID, id);
 	}
 
 	@Override

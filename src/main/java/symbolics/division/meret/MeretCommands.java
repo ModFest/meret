@@ -9,12 +9,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.commands.arguments.IdentifierArgument;
 import net.minecraft.commands.synchronization.SuggestionProviders;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
@@ -33,7 +33,7 @@ public class MeretCommands {
 		return prefix;
 	}
 
-	private static int setMusic(Consumer<Component> feedback, MinecraftServer server, Area area, ResourceLocation sound, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
+	private static int setMusic(Consumer<Component> feedback, MinecraftServer server, Area area, Identifier sound, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
 		SoundEvent soundEvent = SoundEvent.createVariableRangeEvent((sound));
 		Music music = new Music(Holder.direct(soundEvent), minDelay, maxDelay, replaceCurrentMusic);
 		area.put(server, Meret.AREA_MUSIC_DATA_COMPONENT, new AreaMusicComponent(music));
@@ -65,8 +65,8 @@ public class MeretCommands {
 		dispatcher.register(
 			literal("meret")
 				.then(literal("set")
-					.then(argument("area", ResourceLocationArgument.id()).suggests(AreaArgument::listSuggestions)
-						.then(argument("sound", ResourceLocationArgument.id())
+					.then(argument("area", IdentifierArgument.id()).suggests(AreaArgument::listSuggestions)
+						.then(argument("sound", IdentifierArgument.id())
 							.suggests(SuggestionProviders.cast(SuggestionProviders.AVAILABLE_SOUNDS))
 							.then(argument("minDelay", IntegerArgumentType.integer(0))
 								.then(argument("maxDelay", IntegerArgumentType.integer(0))
@@ -75,7 +75,7 @@ public class MeretCommands {
 											c.getSource()::sendSystemMessage,
 											c.getSource().getServer(),
 											AreaArgument.getArea(c, "area"),
-											ResourceLocationArgument.getId(c, "sound"),
+											IdentifierArgument.getId(c, "sound"),
 											IntegerArgumentType.getInteger(c, "minDelay"),
 											IntegerArgumentType.getInteger(c, "maxDelay"),
 											BoolArgumentType.getBool(c, "replaceCurrent")
@@ -87,7 +87,7 @@ public class MeretCommands {
 					)
 				)
 				.then(literal("clear")
-					.then(argument("area", ResourceLocationArgument.id()).suggests(AreaArgument::listSuggestions)
+					.then(argument("area", IdentifierArgument.id()).suggests(AreaArgument::listSuggestions)
 						.executes(c -> clearMusic(
 							c.getSource()::sendSystemMessage,
 							c.getSource().getServer(),
@@ -95,7 +95,7 @@ public class MeretCommands {
 						))
 					)
 				)
-			.requires(source -> source.hasPermission(2))
+			.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 		);
 	}
 }
