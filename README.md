@@ -21,5 +21,5 @@ Config (`config/meret.toml`):
 
 ---
 
-This mod was originally created by Hama and Tomate as part of [ModFest 1.21](https://modfest.net/1.21).<br/>
+This mod was originally created by hama and Tomate as part of [ModFest 1.21](https://modfest.net/1.21).<br/>
 Feel free to contribute bugfixes and improvements!
