@@ -36,7 +36,7 @@ public class MeretCommands {
 	private static int setMusic(Consumer<Component> feedback, MinecraftServer server, Area area, Identifier sound, int minDelay, int maxDelay, boolean replaceCurrentMusic) {
 		SoundEvent soundEvent = SoundEvent.createVariableRangeEvent((sound));
 		Music music = new Music(Holder.direct(soundEvent), minDelay, maxDelay, replaceCurrentMusic);
-		area.put(server, Meret.AREA_MUSIC_DATA_COMPONENT, new AreaMusicComponent(music));
+		area.put(server, Meret.AREA_MUSIC_DATA_COMPONENT, music);
 		feedback.accept(feedback(ChatFormatting.GREEN,
 			Component.literal("music override for "),
 			Component.literal(area.getId().toString()).withStyle(ChatFormatting.WHITE),
