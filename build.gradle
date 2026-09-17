@@ -13,7 +13,14 @@ base {
 }
 
 repositories {
-	maven { url "https://repo.sleeping.town/" }
+	exclusiveContent {
+		forRepository {
+			maven { url "https://repo.sleeping.town/" }
+		}
+		filter {
+			includeModule "folk.sisby", "kaleido-config"
+		}
+	}
 	exclusiveContent {
 		forRepository {
 			maven { url "https://api.modrinth.com/maven" }
@@ -21,6 +28,9 @@ repositories {
 		filter {
 			includeModule "maven.modrinth", "area_lib"
 		}
+	}
+	flatDir {
+		dir "libs"
 	}
 }
 
