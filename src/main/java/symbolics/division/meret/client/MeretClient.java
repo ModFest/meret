@@ -1,6 +1,6 @@
 package symbolics.division.meret.client;
 
-import dev.doublekekse.area_lib.Area;
+import dev.doublekekse.area_lib.ExperimentalAreaUtils;
 import dev.doublekekse.area_lib.data.AreaClientData;
 import dev.doublekekse.area_lib.data.AreaSavedData;
 import net.fabricmc.api.ClientModInitializer;
@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import symbolics.division.meret.Meret;
 
-import java.util.Comparator;
 import java.util.Optional;
 
 public class MeretClient implements ClientModInitializer {
@@ -27,12 +26,13 @@ public class MeretClient implements ClientModInitializer {
 		if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MUSIC) == 0) {
 			return Optional.empty();
 		}
+
 		if (player == null) return Optional.empty();
 		AreaSavedData areaSavedData = AreaClientData.getClientLevelData();
 		if (areaSavedData == null) return Optional.empty();
-		return areaSavedData.getEntityTrackedAreas(player).stream()
-			.filter(area -> area.has(Meret.AREA_MUSIC_DATA_COMPONENT))
-			.max(Comparator.comparingInt(Area::getPriority))
-			.map(area -> area.get(Meret.AREA_MUSIC_DATA_COMPONENT));
+
+		return Optional.ofNullable(
+			ExperimentalAreaUtils.componentFor(Meret.AREA_MUSIC_DATA_COMPONENT, areaSavedData.getEntityTrackedAreas(player))
+		);
 	}
 }
